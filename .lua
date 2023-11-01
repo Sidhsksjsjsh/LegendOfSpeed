@@ -66,21 +66,6 @@ Callback = function(value)
 end
 end})
 
-Main:AddToggle({
-Name = "Hoops",
-Default = false,
-Callback = function(value)
-    _G.Gyapsja = value 
-         while wait() do
-         if _G.Gyapsja == false then break end
-             children(workspace.Hoops,function(c)
-                        firetouchinterest(c,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,0)
-			wait()
-			firetouchinterest(c,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,1)
-end)
-end
-end})
-
 Tp:AddButton({
 Name = "City",
 Callback = function()
