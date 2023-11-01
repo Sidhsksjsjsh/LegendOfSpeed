@@ -60,28 +60,8 @@ Callback = function(value)
 end
 end})
 
---[[Main:AddToggle({
-Name = "Hoops V1",
-Default = false,
-Callback = function(value)
-    _G.Gayajdhaia = value
-      
-         while wait() do
-         if _G.Gayajdhaia == false then 
-		break
-	end
-	
-             for i,v in pairs(game:GetService("Workspace").Hoops:GetChildren()) do
-				firetouchinterest(v,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,0)
-				wait()
-				firetouchinterest(v,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,1)
-end
-end
-end})
-]]
-
 Main:AddToggle({
-Name = "Hoops V2",
+Name = "Hoops",
 Default = false,
 Callback = function(value)
     _G.Gyapsja = value
