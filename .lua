@@ -60,7 +60,7 @@ Callback = function(value)
 end
 end})
 
-Main:AddToggle({
+--[[Main:AddToggle({
 Name = "Hoops V1",
 Default = false,
 Callback = function(value)
@@ -78,6 +78,7 @@ Callback = function(value)
 end
 end
 end})
+]]
 
 Main:AddToggle({
 Name = "Hoops V2",
@@ -90,7 +91,9 @@ Callback = function(value)
              local children = workspace.Hoops:GetChildren()
                     for i, child in ipairs(children) do
                         if child.Name == "Hoop" then
-                        child.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                        firetouchinterest(child,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,0)
+			wait()
+			firetouchinterest(child,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,
 end
 end
 end
