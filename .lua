@@ -64,8 +64,7 @@ Main:AddToggle({
 Name = "Hoops",
 Default = false,
 Callback = function(value)
-    _G.Gyapsja = value
-      
+    _G.Gyapsja = value 
          while wait() do
          if _G.Gyapsja == false then break end
              local children = workspace.Hoops:GetChildren()
@@ -74,9 +73,9 @@ Callback = function(value)
                         firetouchinterest(child,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,0)
 			wait()
 			firetouchinterest(child,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,
-end
-end
-end
+                                                end
+                                        end
+                                end
 end})
 
 Tp:AddButton({
