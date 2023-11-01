@@ -8,6 +8,12 @@ I'll sort out the features once I get back home.
 
 local Main = Window:MakeTab({Name = "Main",Icon = "rbxassetid://",PremiumOnly = false})
 
+local function children(a,b)
+for _,v in pairs(a:GetChildren()) do
+	b(v)
+end
+end
+
 local Tp =  Window:MakeTab({Name = "Teleport",Icon = "rbxassetid://",PremiumOnly = false})
 local Re = Window:MakeTab({Name = "Rebirth",Icon = "rbxassetid://",PremiumOnly = false})
 local Egg =  Window:MakeTab({Name = "Egg",Icon = "rbxassetid://",PremiumOnly = false})
@@ -67,15 +73,12 @@ Callback = function(value)
     _G.Gyapsja = value 
          while wait() do
          if _G.Gyapsja == false then break end
-             local children = workspace.Hoops:GetChildren()
-                    for i, child in ipairs(children) do
-                        if child.Name == "Hoop" then
-                        firetouchinterest(child,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,0)
+             children(workspace.Hoops,function(c)
+                        firetouchinterest(c,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,0)
 			wait()
-			firetouchinterest(child,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,
-                                                end
-                                        end
-                                end
+			firetouchinterest(c,game:GetService('Players').LocalPlayer.Character.HumanoidRootPart,1)
+end)
+end
 end})
 
 Tp:AddButton({
