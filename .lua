@@ -10,10 +10,41 @@ local Window = library:AddWindow("Sync X - Cheating Tool | Legends Of Speed ⚡"
 
 local self_ind = game.Players.LocalPlayer
 
+local advanced = {}
+local rare = {}
+local basic = {}
+local epic = {}
+local unique = {}
+local omega = {}
+
 local function children(a,virtual)
 for _,v in pairs(a:GetChildren()) do
 virtual(v)
 end
+end
+
+children(self_ind.petsFolder.Advanced,function(v)
+   table.insert(v.Name,advanced)
+end
+
+children(self_ind.petsFolder.Rare,function(v)
+   table.insert(v.Name,rare)
+end
+
+children(self_ind.petsFolder.Basic,function(v)
+   table.insert(v.Name,basic)
+end
+
+children(self_ind.petsFolder.Epic,function(v)
+   table.insert(v.Name,epic)
+end
+
+children(self_ind.petsFolder.Unique,function(v)
+   table.insert(v.Name,unique)
+end
+
+children(self_ind.petsFolder.Omega,function(v)
+   table.insert(v.Name,omega)
 end
 
 local function touch(first,second)
@@ -38,12 +69,22 @@ end)
 end)
 end
 
+local function AddSystem(amount,is)
+for k = 1,tonumber(amount) do
+	is(k)
+end
+end
+
+local function getValue(str)
+	return str.Value
+end
+
 local Main = Window:AddTab("Main")
 local Tp = Window:AddTab("Teleport")
 local Re = Window:AddTab("Rebirth")
 local Egg = Window:AddTab("Egg")
 local P = Window:AddTab("Race")
---local S = Window:AddTab("Speed & Jump")
+local S = Window:AddTab("Pet")
 
 local configTool = {
 	speed = {def = 16,max = 200,min = 0},
@@ -73,24 +114,63 @@ Re:AddSwitch("Rebirth", function(value)
 end
 end)
 
-local citys = Main:AddDropdown("Select world",function(object)
-    _G.CityType = object
+--[[
+local advanced = {}
+local rare = {}
+local basic = {}
+local epic = {}
+local unique = {}
+local omega = {}						
+]]
+
+local citys = S:AddDropdown("Select Pet",function(object)
+    _G.PetType = object
 end)
 
-citys:Add("City")
-citys:Add("Snow")
-citys:Add("Magma")
-citys:Add("Space")
-citys:Add("Desert")
-citys:Add("Legends Highway")
+citys:Add("<!----Advanced---->")
+AddSystem(#advanced,function(i)
+	citys:Add(advanced[i])
+end)
 
--- city:
+citys:Add("<!----Rare---->")
+AddSystem(#rare,function(i)
+	citys:Add(rare[i])
+end)
+
+citys:Add("<!----Basic---->")
+AddSystem(#basic,function(i)
+	citys:Add(basic[i])
+end)
+
+citys:Add("<!----Epic---->")
+AddSystem(#epic,function(i)
+	citys:Add(epic[i])
+end)
+
+citys:Add("<!----Unique---->")
+AddSystem(#unique,function(i)
+	citys:Add(unique[i])
+end)
+
+citys:Add("<!----Omega---->")
+AddSystem(#omega,function(i)
+	citys:Add(omega[i])
+end)
+
+S:AddButton("Evolve", function()
+game:GetService("ReplicatedStorage")["rEvents"]["petEvolveEvent"]:FireServer("evolvePet",_G.PetType)
+end)
+
+S:AddButton("Sell", function()
+game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
+end)
+
 Main:AddSwitch("Farm Yellow Orb", function(value)
     Benesis = value
       
     while wait() do
         if Benesis == false then break end
-        game:GetService('ReplicatedStorage').rEvents.orbEvent:FireServer("collectOrb","Yellow Orb",_G.CityType)
+        game:GetService('ReplicatedStorage').rEvents.orbEvent:FireServer("collectOrb","Yellow Orb",getValue(self_ind.currentMap))
     end
 end)
 
@@ -99,7 +179,7 @@ Main:AddSwitch("Farm Red Orb", function(value)
       
     while wait() do
         if Gajdgsis == false then break end
-        game:GetService('ReplicatedStorage').rEvents.orbEvent:FireServer("collectOrb","Red Orb",_G.CityType)
+        game:GetService('ReplicatedStorage').rEvents.orbEvent:FireServer("collectOrb","Red Orb",getValue(self_ind.currentMap))
     end
 end)
 
@@ -108,7 +188,7 @@ Main:AddSwitch("Farm Gems", function(value)
       
     while wait() do
         if Gajskha == false then break end
-        game:GetService('ReplicatedStorage').rEvents.orbEvent:FireServer("collectOrb","Gem",_G.CityType)
+        game:GetService('ReplicatedStorage').rEvents.orbEvent:FireServer("collectOrb","Gem",getValue(self_ind.currentMap))
     end
 end)
 
