@@ -23,28 +23,32 @@ virtual(v)
 end
 end
 
+local function insert(str,localName)
+table.insert(localName,str)
+end
+
 children(self_ind.petsFolder.Advanced,function(v)
-   table.insert(v.Name,advanced)
+   insert(v.Name,advanced)
 end
 
 children(self_ind.petsFolder.Rare,function(v)
-   table.insert(v.Name,rare)
+   insert(v.Name,rare)
 end
 
 children(self_ind.petsFolder.Basic,function(v)
-   table.insert(v.Name,basic)
+   insert(v.Name,basic)
 end
 
 children(self_ind.petsFolder.Epic,function(v)
-   table.insert(v.Name,epic)
+   insert(v.Name,epic)
 end
 
 children(self_ind.petsFolder.Unique,function(v)
-   table.insert(v.Name,unique)
+   insert(v.Name,unique)
 end
 
 children(self_ind.petsFolder.Omega,function(v)
-   table.insert(v.Name,omega)
+   insert(v.Name,omega)
 end
 
 local function touch(first,second)
@@ -122,48 +126,6 @@ local epic = {}
 local unique = {}
 local omega = {}						
 ]]
-
-local citys = S:AddDropdown("Select Pet",function(object)
-    _G.PetType = object
-end)
-
-citys:Add("<!----Advanced---->")
-AddSystem(#advanced,function(i)
-	citys:Add(advanced[i])
-end)
-
-citys:Add("<!----Rare---->")
-AddSystem(#rare,function(i)
-	citys:Add(rare[i])
-end)
-
-citys:Add("<!----Basic---->")
-AddSystem(#basic,function(i)
-	citys:Add(basic[i])
-end)
-
-citys:Add("<!----Epic---->")
-AddSystem(#epic,function(i)
-	citys:Add(epic[i])
-end)
-
-citys:Add("<!----Unique---->")
-AddSystem(#unique,function(i)
-	citys:Add(unique[i])
-end)
-
-citys:Add("<!----Omega---->")
-AddSystem(#omega,function(i)
-	citys:Add(omega[i])
-end)
-
-S:AddButton("Evolve", function()
-game:GetService("ReplicatedStorage")["rEvents"]["petEvolveEvent"]:FireServer("evolvePet",_G.PetType)
-end)
-
-S:AddButton("Sell", function()
-game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
-end)
 
 Main:AddSwitch("Farm Yellow Orb", function(value)
     Benesis = value
@@ -244,4 +206,46 @@ Egg:AddSwitch("Auto Hatch",function(value)
          if Egg1 == false then break end
              game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",_G.EggType)
 end
+end)
+
+local citys = S:AddDropdown("Select Pet",function(object)
+    _G.PetType = object
+end)
+
+citys:Add("<!----Advanced---->")
+AddSystem(#advanced,function(i)
+	citys:Add(advanced[i])
+end)
+
+citys:Add("<!----Rare---->")
+AddSystem(#rare,function(i)
+	citys:Add(rare[i])
+end)
+
+citys:Add("<!----Basic---->")
+AddSystem(#basic,function(i)
+	citys:Add(basic[i])
+end)
+
+citys:Add("<!----Epic---->")
+AddSystem(#epic,function(i)
+	citys:Add(epic[i])
+end)
+
+citys:Add("<!----Unique---->")
+AddSystem(#unique,function(i)
+	citys:Add(unique[i])
+end)
+
+citys:Add("<!----Omega---->")
+AddSystem(#omega,function(i)
+	citys:Add(omega[i])
+end)
+
+S:AddButton("Evolve", function()
+game:GetService("ReplicatedStorage")["rEvents"]["petEvolveEvent"]:FireServer("evolvePet",_G.PetType)
+end)
+
+S:AddButton("Sell", function()
+game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
 end)
