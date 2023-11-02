@@ -26,31 +26,31 @@ end
 local function insert(str,localName)
 table.insert(localName,str)
 end
---[[
+
 children(self_ind.petsFolder.Advanced,function(v)
    insert(v.Name,advanced)
-end
+end)
 
 children(self_ind.petsFolder.Rare,function(v)
    insert(v.Name,rare)
-end
+end)
 
 children(self_ind.petsFolder.Basic,function(v)
    insert(v.Name,basic)
-end
+end)
 
 children(self_ind.petsFolder.Epic,function(v)
    insert(v.Name,epic)
-end
+end)
 
 children(self_ind.petsFolder.Unique,function(v)
    insert(v.Name,unique)
-end
+end)
 
 children(self_ind.petsFolder.Omega,function(v)
    insert(v.Name,omega)
-end
-]]
+end)
+
 
 local function touch(first,second)
 firetouchinterest(first,self_ind.Character.HumanoidRootPart,second)
@@ -208,7 +208,7 @@ Egg:AddSwitch("Auto Hatch",function(value)
              game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",_G.EggType)
 end
 end)
---[[
+
 local citys = S:AddDropdown("Select Pet",function(object)
     _G.PetType = object
 end)
@@ -250,4 +250,3 @@ end)
 S:AddButton("Sell", function()
 game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
 end)
-]]
