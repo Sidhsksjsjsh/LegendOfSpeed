@@ -52,16 +52,16 @@ children(self_ind.petsFolder.Omega,function(v)
 end)
 
 
-local function touch(first,second)
-firetouchinterest(first,self_ind.Character.HumanoidRootPart,second)
+local function touch(first)
+firetouchinterest(first,self_ind.Character.HumanoidRootPart,0)
+wait()
+firetouchinterest(first,self_ind.Character.HumanoidRootPart,1)
 end
 
 local function Race_Cheat()
 children(game:GetService("Workspace").raceMaps,function(io)
 children(io,function(v)
-touch(v,0)
-wait()
-touch(v,1)
+touch(v)
 end)
 end)
 end
