@@ -67,9 +67,9 @@ end)
 end
 
 local function TP_Race()
-children(game:GetService("Workspace").raceMaps,function(io)
-children(io,function(v)
-self_ind.Character.HumanoidRootPart.CFrame = v.CFrame
+children(game:GetService("Workspace").raceMaps,function(i)
+children(i,function(v)
+self_ind.Character.HumanoidRootPart.CFrame = v.Position
 end)
 end)
 end
