@@ -92,10 +92,10 @@ end
 
 local Main = Window:AddTab("Main")
 local Tp = Window:AddTab("Teleport")
-local Re = Window:AddTab("Rebirth")
+local Re = Window:AddTab("Protection")
 local Egg = Window:AddTab("Egg")
 local P = Window:AddTab("Race")
-local S = Window:AddTab("Pet")
+--local S = Window:AddTab("Pet")
 local gu = Window:AddTab("Game UI")
 
 
@@ -103,6 +103,106 @@ local configTool = {
 	speed = {def = 16,max = 200,min = 0},
 	jump = {def = 50,max = 500, min = 0}
 }
+
+--[[
+local args = {
+    [1] = "sendTradeRequest",
+    [2] = game:GetService("Players")["erichkie30"]
+}
+
+game:GetService("ReplicatedStorage")["rEvents"]["tradingEvent"]:FireServer(unpack(args))
+local args = {
+    [1] = "offerItem",
+    [2] = game:GetService("Players").LocalPlayer:FindFirstChild("Ultimate Overdrive Bunny")
+}
+
+game:GetService("ReplicatedStorage")["rEvents"]["tradingEvent"]:FireServer(unpack(args))
+local args = {
+    [1] = "equipTrail",
+    [2] = game:GetService("Players").LocalPlayer:FindFirstChild("1st Trail")
+}
+
+game:GetService("Players").LocalPlayer["equipTrailEvent"]:FireServer(unpack(args))
+function getNil(name,class) for _,v in next, getnilinstances() do if v.ClassName==class and v.Name==name then return v;end end end
+
+local args = {
+    [1] = "sellTrail",
+    [2] = getNil("Rainbow Steps", "Trail")
+}
+
+game:GetService("ReplicatedStorage")["rEvents"]["sellTrailEvent"]:FireServer(unpack(args))
+game:GetService("ReplicatedStorage")["rEvents"]["getServerTimeRemote"]:InvokeServer()
+game:GetService("ReplicatedStorage")["rEvents"]["petEvolveEvent"]:FireServer("evolvePet",_G.PetType)
+game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
+game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",_G.EggType)
+]]
+
+local Protection = {
+	Trade = false,
+	InputPet = false,
+	SellTrail = false,
+	EquipTrail = false,
+	ServerTime = false,
+	EquipPets = false,
+	SellPet = false,
+	Evolved = false,
+	Egg = false
+}
+
+local OldNameCall = nil
+OldNameCall = hookmetamethod(game, "__namecall", function(self, ...)
+    local Args = {...}
+        if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
+                return 
+        end
+	if self.Name == "tradingEvent" and Args[1] == "offerItem" and Protection.InputPet == true then
+                return 
+	end
+	if self.Name == "equipTrailEvent" and Args[1] == "equipTrail" and Protection.EquipTrail == true then
+                return 
+	end
+	if self.Name == "sellTrailEvent" and Args[1] == "sellTrail" and Protection.SellTrail == true then
+                return 
+	end
+	if self.Name == "sellPetEvent" and Args[1] == "sellPet" and Protection.SellPet == true then
+                return 
+	end
+	if self.Name == "petEvolveEvent" and Args[1] == "evolvePet" and Protection.Evolved == true then
+                return 
+	end
+	if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
+                return 
+	end
+    return OldNameCall(self, unpack(Args))
+end)
+
+Re:AddSwitch("Anti-Trade", function(value)
+    Protection.Trade = value
+end)
+
+Re:AddSwitch("Anti-Add Pet [Trading]", function(value)
+    Protection.InputPet = value
+end)
+
+Re:AddSwitch("Anti-Sell Trail", function(value)
+    Protection.SellTrail = value
+end)
+
+Re:AddSwitch("Anti-Equip Trail", function(value)
+    Protection.EquipTrail = value
+end)
+
+Re:AddSwitch("Anti-Sell Pets", function(value)
+    Protection.SellPet = value
+end)
+
+Re:AddSwitch("Anti-Evolve Pet", function(value)
+    Protection.Evolved = value
+end)
+
+Re:AddSwitch("Anti-Open Crystal", function(value)
+    Protection.Egg = value
+end)
 
 --[[
 configTool["speed"]["min"]
@@ -136,15 +236,6 @@ end)
 
 gu:AddButton("Remove Race Invite",function()
 self_ind.PlayerGui.gameGui.raceJoinLabel:Destroy()
-end)
-
-Re:AddSwitch("Rebirth", function(value)
-    Rebirth = value
-      
-         while wait() do
-         if Rebirth == false then break end
-             game:GetService("ReplicatedStorage").rEvents.rebirthEvent:FireServer("rebirthRequest")
-end
 end)
 
 --[[
@@ -642,6 +733,15 @@ end
 end
 end)
 
+Main:AddSwitch("Rebirth", function(value)
+    Rebirth = value
+      
+         while wait() do
+         if Rebirth == false then break end
+             game:GetService("ReplicatedStorage").rEvents.rebirthEvent:FireServer("rebirthRequest")
+end
+end)
+
 Tp:AddButton("City", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9682.98828, 74.8522873, 3099.03394, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
 end)
@@ -682,7 +782,7 @@ Egg:AddSwitch("Auto Hatch",function(value)
              game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",_G.EggType)
 end
 end)
-
+--[[
 local citys = S:AddDropdown("Select Pet",function(object)
     _G.PetType = object
 end)
@@ -724,3 +824,4 @@ end)
 S:AddButton("Sell", function()
 game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
 end)
+]]
