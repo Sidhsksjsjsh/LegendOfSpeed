@@ -1,4 +1,4 @@
-local fnl = loadstring(game:HttpGetAsync 'https://raw.githubusercontent.com/Code1Tech/utils/main/notification.lua')()
+local fnl = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/Code1Tech/utils/main/notification.lua'))()
 local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
 
 
