@@ -239,12 +239,20 @@ configTool["speed"]["max"]
 configTool["speed"]["def"]
 ]]
 
-P:AddButton("Finish Race V1",function()
-Race_Cheat()
+P:AddSwitch("Auto Join Race", function(value)
+	JoinRace = value
+	while wait() do
+		if JoinRace == false then break end
+			game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
+	end
 end)
 
-P:AddButton("Finish Race V2",function()
-TP_Race()
+P:AddSwitch("Auto Finish Race", function(value)
+	Finish = value
+	while wait() do
+		if Finish == false then break end
+			Race_Cheat()
+	end
 end)
 
 gu:AddTextBox("Input Fake Level", function(str)
