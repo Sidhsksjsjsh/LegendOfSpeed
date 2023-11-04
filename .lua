@@ -16,6 +16,7 @@ local basic = {}
 local epic = {}
 local unique = {}
 local omega = {}
+local CrystalFolder = {}
 
 local function children(a,virtual)
 for _,v in pairs(a:GetChildren()) do
@@ -23,9 +24,19 @@ virtual(v)
 end
 end
 
+local function Shitty(str,value)
+for _,v in pairs(str:GetDescendants()) do
+	value(v)
+end
+end
+
 local function insert(str,localName)
 table.insert(localName,str)
 end
+
+children(game:GetService("Workspace").mapCrystalsFolder,function(v)
+	insert(v.Name,CrystalFolder)
+end)
 
 children(self_ind.petsFolder.Advanced,function(v)
    insert(v.Name,advanced)
@@ -58,17 +69,20 @@ wait()
 firetouchinterest(first,self_ind.Character.HumanoidRootPart,1)
 end
 
+-- game:GetService("Workspace").raceMaps.finishPart
 local function Race_Cheat()
-children(game:GetService("Workspace").raceMaps,function(io)
-children(io,function(v)
+Shitty(game:GetService("Workspace"),function(v)
+if v.Name == "finishPart" then
 touch(v)
-end)
+end
 end)
 end
 
 local function TP_Race()
-children(game:GetService("Workspace").raceMaps,function(v)
-self_ind.Character.HumanoidRootPart.CFrame = v.finishPart.Position
+Shitty(game:GetService("Workspace"),function(v)
+if v.Name == "finishPart" then
+self_ind.Character.HumanoidRootPart.CFrame = v.Position
+end
 end)
 end
 
@@ -135,6 +149,13 @@ game:GetService("ReplicatedStorage")["rEvents"]["getServerTimeRemote"]:InvokeSer
 game:GetService("ReplicatedStorage")["rEvents"]["petEvolveEvent"]:FireServer("evolvePet",_G.PetType)
 game:GetService("ReplicatedStorage")["rEvents"]["sellPetEvent"]:FireServer("sellPet",_G.PetType)
 game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",_G.EggType)
+local args = {
+    [1] = "requestAccepted",
+    [2] = game:GetService("Players")["CookieProgamming"]
+}
+
+game:GetService("ReplicatedStorage")["rEvents"]["tradingEvent"]:FireServer(unpack(args))
+
 ]]
 
 local Protection = {
@@ -146,11 +167,12 @@ local Protection = {
 	EquipPets = false,
 	SellPet = false,
 	Evolved = false,
-	Egg = false
+	Egg = false,
+	Accepted = false
 }
 
-local OldNameCall = nil
-OldNameCall = hookmetamethod(game, "__namecall", function(self, ...)
+local SystemProtector = nil
+SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
     local Args = {...}
         if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
                 return 
@@ -173,7 +195,10 @@ OldNameCall = hookmetamethod(game, "__namecall", function(self, ...)
 	if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
                 return 
 	end
-    return OldNameCall(self, unpack(Args))
+	if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
+                return 
+	end
+    return SystemProtector(self, unpack(Args))
 end)
 
 Re:AddSwitch("Anti-Trade", function(value)
@@ -202,6 +227,10 @@ end)
 
 Re:AddSwitch("Anti-Open Crystal", function(value)
     Protection.Egg = value
+end)
+
+Re:AddSwitch("Anti-Accepted [Request Trading]", function(value)
+    Protection.Accepted = value
 end)
 
 --[[
@@ -743,26 +772,36 @@ end
 end)
 
 Tp:AddButton("City", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9682.98828, 74.8522873, 3099.03394, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
+self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-9682.98828, 74.8522873, 3099.03394, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
 end)
 
 Tp:AddButton("Snow", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-9676.13867, 74.8522873, 3782.69385, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-9676.13867, 74.8522873, 3782.69385, 0, 0, -1, 0, 1, 0, 1, 0, 0)
 end)
 
 Tp:AddButton("Magma", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11054.9688, 232.791656, 4898.62842, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
+self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-11054.9688, 232.791656, 4898.62842, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
 end)
 
 Tp:AddButton("Legends Highway", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-13098.8711, 232.791656, 5907.62793, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
+self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-13098.8711, 232.791656, 5907.62793, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
+end)
+
+Tp:AddButton("Pirate Course", function()
+self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-926, 27, 2823)
+wait(1)
+self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-1605, 102, 5657)
+end)
+
+Tp:AddButton("Speed Desert [ Different Game ]", function()
+game:GetService('TeleportService'):Teleport(3276265788)
 end)
 
 local balls = Egg:AddDropdown("Select Eggs",function(object)
     _G.EggType = object
 end)
 
-balls:Add("Red Crystal")
+--[[balls:Add("Red Crystal")
 balls:Add("Purple Crystal")
 balls:Add("Yellow Crystal")
 balls:Add("Lightning Crystal")
@@ -772,7 +811,11 @@ balls:Add("Electro Legends Crystal")
 balls:Add("Space Crystal")
 balls:Add("Alien Crystal")
 balls:Add("Desert Crystal")
--- balls:Add("")
+]]
+
+AddSystem(#CrystalFolder,function(i)
+	balls:Add(CrystalFolder[i])
+end)
 
 Egg:AddSwitch("Auto Hatch",function(value)
     Egg1 = value
