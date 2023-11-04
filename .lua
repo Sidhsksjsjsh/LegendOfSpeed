@@ -1,6 +1,5 @@
-local fnl = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/Sidhsksjsjsh/Focats-Notify-Lib/main/.lua'))()
 local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
-
+local fnl = loadstring(game:HttpGet('https://raw.githubusercontent.com/Sidhsksjsjsh/Focats-Notify-Lib/main/.lua'))()
 
 local Window = library:AddWindow("Sync X - Cheating Tool | Legends Of Speed ⚡",
     {
