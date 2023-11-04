@@ -213,7 +213,7 @@ SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
 end)
 
 local SystemProtectorV2 = nil
-SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
+SystemProtectorV2 = hookmetamethod(game, "__namecall", function(self, ...)
     local Args = {...}
         if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
                 IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
