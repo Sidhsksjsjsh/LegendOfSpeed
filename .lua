@@ -1,5 +1,4 @@
 local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
-local fnl = loadstring(game:HttpGet('https://raw.githubusercontent.com/Sidhsksjsjsh/Focats-Notify-Lib/main/.lua'))()
 
 local Window = library:AddWindow("Sync X - Cheating Tool | Legends Of Speed ⚡",
     {
@@ -118,7 +117,7 @@ local function IrisNotify(title,text,dur)
   text = text or "No text provided."
   dur = dur or 5
   
-  fnl:MakeNotification({
+  library:MakeNotification({
     Title = title,
     Text = text,
     Duration = dur
