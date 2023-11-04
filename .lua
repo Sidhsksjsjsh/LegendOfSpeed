@@ -209,13 +209,7 @@ SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
 	if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
                 return 
 	end
-    return SystemProtector(self, unpack(Args))
-end)
-
-local SystemProtectorV2 = nil
-SystemProtectorV2 = hookmetamethod(game, "__namecall", function(self, ...)
-    local Args = {...}
-        if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
+	if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then -- this
                 IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
         end
 	if self.Name == "tradingEvent" and Args[1] == "offerItem" and Protection.InputPet == true then
@@ -239,7 +233,7 @@ SystemProtectorV2 = hookmetamethod(game, "__namecall", function(self, ...)
 	if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
                 IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
 	end
-    return SystemProtectorV2(self, unpack(Args))
+    return SystemProtector(self, unpack(Args))
 end)
 
 Re:AddSwitch("Anti-Trade", function(value)
