@@ -1,3 +1,5 @@
+getgenv().IrisAd = true
+local Notification = loadstring(game:HttpGet("https://api.irisapp.ca/Scripts/IrisBetterNotifications.lua"))()
 local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
 
 
@@ -113,6 +115,25 @@ local P = Window:AddTab("Race")
 local gu = Window:AddTab("Game UI")
 
 
+local function IrisNotify(title,text,image,dur)
+Notification.Notify(title,text,"rbxassetid://" .. image,{
+    Duration = dur,
+    
+    TitleSettings = {
+        TextXAlignment = Enum.TextXAlignment.Center,
+        Font = Enum.Font.SourceSansSemibold,
+    },
+
+
+    GradientSettings = {
+        GradientEnabled = false,
+        SolidColorEnabled = true,
+        SolidColor = Color3.fromRGB(124, 83, 240),
+        Retract = true
+    }
+})
+end
+
 local configTool = {
 	speed = {def = 16,max = 200,min = 0},
 	jump = {def = 50,max = 500, min = 0}
@@ -199,6 +220,36 @@ SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
                 return 
 	end
     return SystemProtector(self, unpack(Args))
+end)
+
+local SystemProtectorV2 = nil
+SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
+    local Args = {...}
+        if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+        end
+	if self.Name == "tradingEvent" and Args[1] == "offerItem" and Protection.InputPet == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+	if self.Name == "equipTrailEvent" and Args[1] == "equipTrail" and Protection.EquipTrail == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+	if self.Name == "sellTrailEvent" and Args[1] == "sellTrail" and Protection.SellTrail == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+	if self.Name == "sellPetEvent" and Args[1] == "sellPet" and Protection.SellPet == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+	if self.Name == "petEvolveEvent" and Args[1] == "evolvePet" and Protection.Evolved == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+	if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+	if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
+                IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","13040492999",7)
+	end
+    return SystemProtectorV2(self, unpack(Args))
 end)
 
 Re:AddSwitch("Anti-Trade", function(value)
@@ -803,6 +854,14 @@ end)
 
 Tp:AddButton("Speed Desert [ Different Game ]", function()
 game:GetService('TeleportService'):Teleport(3276265788)
+end)
+
+Tp:AddButton("Space [ Different Game ] [ 50 Race ]", function()
+game:GetService('TeleportService'):Teleport(3232996272)
+end)
+
+Tp:AddButton("Back To City [ Different Game ]", function()
+game:GetService('TeleportService'):Teleport(3101667897)
 end)
 
 local balls = Egg:AddDropdown("Select Eggs",function(object)
