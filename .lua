@@ -117,7 +117,7 @@ local gu = Window:AddTab("Game UI")
 local function IrisNotify(title,text,dur)
   title = title or "Notification"
   text = text or "No text provided."
-  duration = dur or 5
+  dur = dur or 5
   
   fnl:MakeNotification({
     Title = title,
