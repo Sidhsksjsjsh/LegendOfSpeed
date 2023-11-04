@@ -82,12 +82,22 @@ local function getValue(str)
 	return str.Value
 end
 
+local function getText(str)
+	return str.Text
+end
+
+local function editText(str,value)
+	str.Text = value
+end
+
 local Main = Window:AddTab("Main")
 local Tp = Window:AddTab("Teleport")
 local Re = Window:AddTab("Rebirth")
 local Egg = Window:AddTab("Egg")
 local P = Window:AddTab("Race")
 local S = Window:AddTab("Pet")
+local gu = Window:AddTab("Game UI")
+
 
 local configTool = {
 	speed = {def = 16,max = 200,min = 0},
@@ -106,6 +116,26 @@ end)
 
 P:AddButton("Finish Race V2",function()
 TP_Race()
+end)
+
+gu:AddTextBox("Input Fake Level", function(str)
+editText(self_ind.PlayerGui.gameGui.statsFrame.levelLabel,str)
+end)
+
+gu:AddTextBox("Input Fake EXP", function(str)
+editText(self_ind.PlayerGui.gameGui.statsFrame.expLabel,str)
+end)
+
+gu:AddTextBox("Input Fake Speed", function(str)
+editText(self_ind.PlayerGui.gameGui.statsFrame.speedLabel,str)
+end)
+
+gu:AddTextBox("Input Fake Race", function(str)
+editText(self_ind.PlayerGui.gameGui.statsFrame.racesLabel,str)
+end)
+
+gu:AddButton("Remove Race Invite",function()
+self_ind.PlayerGui.gameGui.raceJoinLabel:Destroy()
 end)
 
 Re:AddSwitch("Rebirth", function(value)
