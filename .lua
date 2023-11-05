@@ -837,14 +837,17 @@ self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-1605, 102, 5657)
 end)
 
 Tp:AddButton("Speed Desert [ Different Game ]", function()
+library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
 game:GetService('TeleportService'):Teleport(3276265788)
 end)
 
 Tp:AddButton("Space [ Different Game ] [ 50 Race ]", function()
+library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
 game:GetService('TeleportService'):Teleport(3232996272)
 end)
 
 Tp:AddButton("Back To City [ Different Game ]", function()
+library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
 game:GetService('TeleportService'):Teleport(3101667897)
 end)
 
