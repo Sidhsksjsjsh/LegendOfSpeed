@@ -299,11 +299,21 @@ configTool["speed"]["max"]
 configTool["speed"]["def"]
 ]]
 
+local MaxJoin = 0
+local function JoinRaces() -- Simple Logic
+if not MaxJoin > 0 then
+	game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
+	MaxJoin = 1
+elseif self_ind.PlayerGui.gameGui.raceJoinLabel.Visible == true then
+	MaxJoin = 0
+end
+end
+
 P:AddSwitch("Auto Join Race", function(value)
 	JoinRace = value
 	while wait() do
 		if JoinRace == false then break end
-			game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
+			JoinRaces()
 	end
 end)
 
