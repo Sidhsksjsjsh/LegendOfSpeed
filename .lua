@@ -182,10 +182,16 @@ local Protection = {
 	Accepted = false
 }
 
-local SystemProtector = nil
-SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
-    local Args = {...}
-        if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
+-- from Server to Client:
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
 		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
                 return 
         end
@@ -209,14 +215,49 @@ SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
 		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
                 return 
 	end
-	if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end
 	if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
 		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
                 return 
 	end
+	return namecall(self, ...) 
+end)
+
+-- from Client to Client
+local SystemProtector = nil
+SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
+    local Args = {...}
+        --[[if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+        end
+	if self.Name == "tradingEvent" and Args[1] == "offerItem" and Protection.InputPet == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end
+	if self.Name == "equipTrailEvent" and Args[1] == "equipTrail" and Protection.EquipTrail == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end
+	if self.Name == "sellTrailEvent" and Args[1] == "sellTrail" and Protection.SellTrail == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end
+	if self.Name == "sellPetEvent" and Args[1] == "sellPet" and Protection.SellPet == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end
+	if self.Name == "petEvolveEvent" and Args[1] == "evolvePet" and Protection.Evolved == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end]]
+	if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end
+	--[[if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
+		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+                return 
+	end]]
     return SystemProtector(self, unpack(Args))
 end)
 
