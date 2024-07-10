@@ -272,7 +272,11 @@ elseif self_ind.PlayerGui.gameGui.raceJoinLabel.Visible == true then
 	MaxJoin = 0
 end
 end
-
+--[[
+for m,n in pairs(getconnections(j["PlayerGui"]["UniversalGui"]["UniversalCenterUIFrame"]["SlotsHolder"]["Skill1"].MouseButton1Click)) do
+        n:Fire()
+end
+]]
 P:Toggle("Auto join race",false,function(value)
 	JoinRace = value
 	while wait() do
