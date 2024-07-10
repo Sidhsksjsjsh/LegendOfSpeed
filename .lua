@@ -276,14 +276,22 @@ end
 for m,n in pairs(getconnections(j["PlayerGui"]["UniversalGui"]["UniversalCenterUIFrame"]["SlotsHolder"]["Skill1"].MouseButton1Click)) do
         n:Fire()
 end
+:GetPropertyChangedSignal("Value"):Connect(function()
 ]]
+local JoinRace = false
 P:Toggle("Auto join race",false,function(value)
 	JoinRace = value
-	while wait() do
-		if JoinRace == false then break end
-			if self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["Visible"] == true then
-				game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
-			end
+end)
+
+self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]:GetPropertyChangedSignal("Visible"):Connect(function()
+	if JoinRace == true then
+		for i,v in pairs(getconnections(self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["yesButton"].MouseButton1Click)) do
+			v:Fire()
+		end
+	else
+		for i,v in pairs(getconnections(self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["noButton"].MouseButton1Click)) do
+			v:Fire()
+		end
 	end
 end)
 
