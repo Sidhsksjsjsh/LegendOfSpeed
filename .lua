@@ -1,4 +1,4 @@
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
+--[[local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
 
 local Window = library:AddWindow("VIP Turtle Hub V5 - Cheating Tool | Legends Of Speed ⚡",
     {
@@ -6,6 +6,10 @@ local Window = library:AddWindow("VIP Turtle Hub V5 - Cheating Tool | Legends Of
         min_size = Vector2.new(373, 433),
         toggle_key = Enum.KeyCode.RightShift,
     })
+]]
+
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sidhsksjsjsh/VAPE-UI-MODDED/main/.lua"))()
+local wndw = lib:Window("VIP Turtle Hub V4")
 
 local self_ind = game.Players.LocalPlayer
 
@@ -63,18 +67,18 @@ end)
 
 
 local function touch(first)
-firetouchinterest(first,self_ind.Character.HumanoidRootPart,0)
-wait()
-firetouchinterest(first,self_ind.Character.HumanoidRootPart,1)
+	firetouchinterest(first,self_ind.Character.HumanoidRootPart,0)
+	wait()
+	firetouchinterest(first,self_ind.Character.HumanoidRootPart,1)
 end
 
 -- game:GetService("Workspace").raceMaps.finishPart
 local function Race_Cheat()
-Shitty(game:GetService("Workspace"),function(v)
-if v.Name == "finishPart" then
-touch(v)
-end
-end)
+	lib:descendant(game:GetService("Workspace"),function(v)
+		if v.Name == "finishPart" then
+			touch(v)
+		end
+	end)
 end
 
 local function TP_Race()
@@ -103,26 +107,14 @@ local function editText(str,value)
 	str.Text = value
 end
 
-local Main = Window:AddTab("Main")
-local Tp = Window:AddTab("Teleport")
-local Re = Window:AddTab("Protection")
-local Egg = Window:AddTab("Egg")
-local P = Window:AddTab("Race")
+local Main = wndw:Tab("Main") --Window:AddTab("Main")
+local Tp = wndw:Tab("Teleport") --Window:AddTab("Teleport")
+local Re = wndw:Tab("Protection") --Window:AddTab("Protection")
+local Egg = wndw:Tab("Egg") --Window:AddTab("Egg")
+local P = wndw:Tab("Race") --Window:AddTab("Race")
 --local S = Window:AddTab("Pet")
-local gu = Window:AddTab("Game UI")
+local gu = wndw:Tab("Game UI") --Window:AddTab("Game UI")
 
-
-local function IrisNotify(title,text,dur)
-  title = title or "Notification"
-  text = text or "No text provided."
-  dur = dur or 5
-  
-  library:MakeNotification({
-    Title = title,
-    Text = text,
-    Duration = dur
-  })
-end
 
 local configTool = {
 	speed = {def = 16,max = 200,min = 0},
@@ -192,31 +184,31 @@ mt.__namecall = newcclosure(function(self, ...)
 	local Args = {...}
 
 	if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
         end
 	if self.Name == "tradingEvent" and Args[1] == "offerItem" and Protection.InputPet == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
 	if self.Name == "equipTrailEvent" and Args[1] == "equipTrail" and Protection.EquipTrail == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
 	if self.Name == "sellTrailEvent" and Args[1] == "sellTrail" and Protection.SellTrail == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
 	if self.Name == "sellPetEvent" and Args[1] == "sellPet" and Protection.SellPet == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
 	if self.Name == "petEvolveEvent" and Args[1] == "evolvePet" and Protection.Evolved == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
 	if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
 	return namecall(self, ...) 
@@ -226,70 +218,42 @@ end)
 local SystemProtector = nil
 SystemProtector = hookmetamethod(game, "__namecall", function(self, ...)
     local Args = {...}
-        --[[if self.Name == "tradingEvent" and Args[1] == "sendTradeRequest" and Protection.Trade == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-        end
-	if self.Name == "tradingEvent" and Args[1] == "offerItem" and Protection.InputPet == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
+        if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
+		lib:notify(lib:ColorFonts(lib:ColorFonts("Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.","Bold"),"Red"),10)
                 return 
 	end
-	if self.Name == "equipTrailEvent" and Args[1] == "equipTrail" and Protection.EquipTrail == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end
-	if self.Name == "sellTrailEvent" and Args[1] == "sellTrail" and Protection.SellTrail == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end
-	if self.Name == "sellPetEvent" and Args[1] == "sellPet" and Protection.SellPet == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end
-	if self.Name == "petEvolveEvent" and Args[1] == "evolvePet" and Protection.Evolved == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end]]
-	if self.Name == "openCrystalRemote" and Args[1] == "openCrystal" and Protection.Egg == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end
-	--[[if self.Name == "tradingEvent" and Args[1] == "requestAccepted" and Protection.Accepted == true then
-		IrisNotify("Script blocked (" .. tostring(self.Name) .. ")","Remote '" .. tostring(self.Name) .. "' & '" .. tostring(Args[1]) .. "' blocked, unable to call Service 'ReplicatedStorage'.",7)
-                return 
-	end]]
-    return SystemProtector(self, unpack(Args))
+    return SystemProtector(self,unpack(Args))
 end)
 
-Re:AddSwitch("Anti-Trade", function(value)
+Re:Toggle("Anti-trade",false,function(value)
     Protection.Trade = value
 end)
 
-Re:AddSwitch("Anti-Add Pet [Trading]", function(value)
+Re:Toggle("Anti-add pet [ trading ]",false,function(value)
     Protection.InputPet = value
 end)
 
-Re:AddSwitch("Anti-Sell Trail", function(value)
+Re:Toggle("Anti-sell trail",false,function(value)
     Protection.SellTrail = value
 end)
 
-Re:AddSwitch("Anti-Equip Trail", function(value)
+Re:Toggle("Anti-equip trail",false,function(value)
     Protection.EquipTrail = value
 end)
 
-Re:AddSwitch("Anti-Sell Pets", function(value)
+Re:Toggle("Anti-sell pet",false,function(value)
     Protection.SellPet = value
 end)
 
-Re:AddSwitch("Anti-Evolve Pet", function(value)
+Re:Toggle("Anti-evolve pet",false,function(value)
     Protection.Evolved = value
 end)
 
-Re:AddSwitch("Anti-Open Crystal", function(value)
+Re:Toggle("Anti-open crystal",false,function(value)
     Protection.Egg = value
 end)
 
-Re:AddSwitch("Anti-Accepted [Request Trading]", function(value)
+Re:Toggle("Anti-accept trade request",false,function(value)
     Protection.Accepted = value
 end)
 
@@ -309,15 +273,17 @@ elseif self_ind.PlayerGui.gameGui.raceJoinLabel.Visible == true then
 end
 end
 
-P:AddSwitch("Auto Join Race", function(value)
+P:Toggle("Auto join race",false,function(value)
 	JoinRace = value
 	while wait() do
 		if JoinRace == false then break end
-			JoinRaces()
+			if self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["Visible"] == true then
+				game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
+			end
 	end
 end)
 
-P:AddSwitch("Auto Finish Race", function(value)
+P:Toggle("Auto win race",false,function(value)
 	Finish = value
 	while wait() do
 		if Finish == false then break end
@@ -325,24 +291,8 @@ P:AddSwitch("Auto Finish Race", function(value)
 	end
 end)
 
-gu:AddTextBox("Input Fake Level", function(str)
-editText(self_ind.PlayerGui.gameGui.statsFrame.levelLabel,str)
-end)
-
-gu:AddTextBox("Input Fake EXP", function(str)
-editText(self_ind.PlayerGui.gameGui.statsFrame.expLabel,str)
-end)
-
-gu:AddTextBox("Input Fake Speed", function(str)
-editText(self_ind.PlayerGui.gameGui.statsFrame.speedLabel,str)
-end)
-
-gu:AddTextBox("Input Fake Race", function(str)
-editText(self_ind.PlayerGui.gameGui.statsFrame.racesLabel,str)
-end)
-
-gu:AddButton("Remove Race Invite",function()
-self_ind.PlayerGui.gameGui.raceJoinLabel:Destroy()
+gu:Button("Destroy race invite interface",function()
+	self_ind.PlayerGui.gameGui.raceJoinLabel:Destroy()
 end)
 
 --[[
@@ -354,7 +304,7 @@ local unique = {}
 local omega = {}						
 ]]
 
-Main:AddSwitch("Farm Yellow Orb", function(value)
+Main:Toggle("Auto farm yellow orbs [ X50 ]",false,function(value)
     Benesis = value
       
     while wait() do
@@ -435,7 +385,7 @@ Main:AddSwitch("Farm Yellow Orb", function(value)
     end
 end)
 
-Main:AddSwitch("Farm Red Orb", function(value)
+Main:Toggle("Auto farm red orbs [ X50 ]",false,function(value)
     Gajdgsis = value
       
     while wait() do
@@ -550,7 +500,7 @@ Main:AddSwitch("Farm Red Orb", function(value)
     end
 end)
 
-Main:AddSwitch("Farm Orange Orb", function(value)
+Main:Toggle("Auto farm orange orbs [ X50 ]",false,function(value)
 	OrangeOrbs = value
 
 	while wait() do
@@ -636,7 +586,7 @@ Main:AddSwitch("Farm Orange Orb", function(value)
 	end
 end)
 
-Main:AddSwitch("Farm Blue Orb", function(value)
+Main:Toggle("Auto farm blue orbs [ X50 ]",false,function(value)
 	BlueOrbs = value
 	while wait() do
 		if BlueOrbs == false then break end
@@ -737,7 +687,7 @@ Main:AddSwitch("Farm Blue Orb", function(value)
 	end
 end)
 
-Main:AddSwitch("Farm Gems", function(value)
+Main:Toggle("Auto farm gems [ X50 ]",false,function(value)
     Gajskha = value
       
     while wait() do
@@ -827,7 +777,7 @@ Main:AddSwitch("Farm Gems", function(value)
     end
 end)
 
-Main:AddSwitch("Auto Hoops", function(value)
+Main:Toggle("Auto hoops",false,function(value)
     Gayajdhaia = value
       
          while wait() do
@@ -840,7 +790,7 @@ end
 end
 end)
 
-Main:AddSwitch("Rebirth", function(value)
+Main:Toggle("Auto rebirth",false,function(value)
     Rebirth = value
       
          while wait() do
@@ -849,44 +799,73 @@ Main:AddSwitch("Rebirth", function(value)
 end
 end)
 
-Tp:AddButton("City", function()
-self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-9682.98828, 74.8522873, 3099.03394, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
+Tp:Button("City",function()
+	self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-9682.98828, 74.8522873, 3099.03394, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
 end)
 
-Tp:AddButton("Snow", function()
-self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-9676.13867, 74.8522873, 3782.69385, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Tp:Button("Snow",function()
+	self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-9676.13867, 74.8522873, 3782.69385, 0, 0, -1, 0, 1, 0, 1, 0, 0)
 end)
 
-Tp:AddButton("Magma", function()
-self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-11054.9688, 232.791656, 4898.62842, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
+Tp:Button("Magma",function()
+	self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-11054.9688, 232.791656, 4898.62842, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
 end)
 
-Tp:AddButton("Legends Highway", function()
-self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-13098.8711, 232.791656, 5907.62793, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
+Tp:Button("Legends Highway",function()
+	self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-13098.8711, 232.791656, 5907.62793, -0.0872479677, 0.000158954252, -0.996186614, -0.00054083002, 0.999999821, 0.00020692969, 0.996186495, 0.000556821818, -0.0872478485)
 end)
 
-Tp:AddButton("Pirate Course", function()
-self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-926, 27, 2823)
-wait(1)
-self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-1605, 102, 5657)
+Tp:Button("Pirate Course",function()
+	self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-926, 27, 2823)
+	wait(1)
+	self_ind.Character.HumanoidRootPart.CFrame = CFrame.new(-1605, 102, 5657)
 end)
 
-Tp:AddButton("Speed Desert [ Different Game ]", function()
-library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
-game:GetService('TeleportService'):Teleport(3276265788)
+--[[Tp:Button("Speed Desert [ Different Game ]",function()
+	library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+	game:GetService('TeleportService'):Teleport(3276265788)
 end)
 
-Tp:AddButton("Space [ Different Game ] [ 50 Race ]", function()
-library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
-game:GetService('TeleportService'):Teleport(3232996272)
+Tp:Button("Space [ Different Game ] [ 50 Race ]",function()
+	library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+	game:GetService('TeleportService'):Teleport(3232996272)
 end)
 
-Tp:AddButton("Back To City [ Different Game ]", function()
-library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
-game:GetService('TeleportService'):Teleport(3101667897)
-end)
+Tp:Button("Back to city",function()
+	library:OnTeleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+	game:GetService('TeleportService'):Teleport(3101667897)
+end)]]
 
-local balls = Egg:AddDropdown("Select Eggs",function(object)
+if game.PlaceId == 3101667897 then -- city
+	Tp:Button("Speed Desert [ Different Game ]",function()
+		lib:Queue_On_Teleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+		game:GetService('TeleportService'):Teleport(3276265788)
+	end)
+	Tp:Button("Space [ Different Game ] [ 50 Race ]",function()
+		lib:Queue_On_Teleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+		game:GetService('TeleportService'):Teleport(3232996272)
+	end)
+elseif game.PlaceId == 3276265788 then -- Speed Desert
+	Tp:Button("Space [ Different Game ] [ 50 Race ]",function()
+		lib:Queue_On_Teleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+		game:GetService('TeleportService'):Teleport(3232996272)
+	end)
+	Tp:Button("Back to city",function()
+		lib:Queue_On_Teleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+		game:GetService('TeleportService'):Teleport(3101667897)
+	end)
+elseif game.PlaceId == 3232996272 then -- Space
+	Tp:Button("Back to city",function()
+		lib:Queue_On_Teleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+		game:GetService('TeleportService'):Teleport(3101667897)
+	end)
+	Tp:Button("Speed Desert [ Different Game ]",function()
+		lib:Queue_On_Teleport("https://raw.githubusercontent.com/Sidhsksjsjsh/LegendOfSpeed/main/.lua")
+		game:GetService('TeleportService'):Teleport(3276265788)
+	end)
+end
+
+Egg:Dropdown("Select eggs",CrystalFolder,function(value)
     _G.EggType = object
 end)
 
@@ -902,11 +881,7 @@ balls:Add("Alien Crystal")
 balls:Add("Desert Crystal")
 ]]
 
-AddSystem(#CrystalFolder,function(i)
-	balls:Add(CrystalFolder[i])
-end)
-
-Egg:AddSwitch("Auto Hatch",function(value)
+Egg:Toggle("Auto hatch",false,function(value)
     Egg1 = value
       
          while wait() do
