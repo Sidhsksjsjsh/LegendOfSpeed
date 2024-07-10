@@ -865,8 +865,9 @@ elseif game.PlaceId == 3232996272 then -- Space
 	end)
 end
 
+local eggname = ""
 Egg:Dropdown("Select eggs",CrystalFolder,function(value)
-    _G.EggType = object
+    eggname = value
 end)
 
 --[[balls:Add("Red Crystal")
@@ -886,7 +887,7 @@ Egg:Toggle("Auto hatch",false,function(value)
       
          while wait() do
          if Egg1 == false then break end
-             game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",_G.EggType)
+             game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",eggname)
 end
 end)
 --[[
