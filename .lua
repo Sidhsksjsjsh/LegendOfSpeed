@@ -890,6 +890,8 @@ Egg:Toggle("Auto hatch",false,function(value)
              game:GetService('ReplicatedStorage').rEvents.openCrystalRemote:InvokeServer("openCrystal",eggname)
 end
 end)
+
+lib.DeveloperEncrypt(wndw)
 --[[
 local citys = S:AddDropdown("Select Pet",function(object)
     _G.PetType = object
