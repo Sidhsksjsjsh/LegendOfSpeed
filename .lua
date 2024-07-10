@@ -268,7 +268,7 @@ local function JoinRaces() -- Simple Logic
 if not MaxJoin > 0 then
 	game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
 	MaxJoin = 1
-elseif self_ind.PlayerGui.gameGui.raceJoinLabel.Visible == true then
+elseif self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["Visible"] == true then
 	MaxJoin = 0
 end
 end
@@ -284,14 +284,8 @@ P:Toggle("Auto join race",false,function(value)
 end)
 
 self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]:GetPropertyChangedSignal("Visible"):Connect(function()
-	if JoinRace == true then
-		for i,v in pairs(getconnections(self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["yesButton"].MouseButton1Click)) do
-			v:Fire()
-		end
-	else
-		for i,v in pairs(getconnections(self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["noButton"].MouseButton1Click)) do
-			v:Fire()
-		end
+	if JoinRace == true and self_ind["PlayerGui"]["gameGui"]["raceJoinLabel"]["Visible"] == true then
+		game:GetService("ReplicatedStorage")["rEvents"]["raceEvent"]:FireServer("joinRace")
 	end
 end)
 
